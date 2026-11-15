@@ -1,0 +1,649 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Order Sod | Sod N' Turf</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script src="https://js.stripe.com/v3/"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #fff;
+      margin: 0;
+      color: #17251b;
+    }
+
+    .green {
+      background: #078333;
+    }
+
+    .field {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #e2e8e4;
+      border-radius: 7px;
+      font-size: 11px;
+      outline: none;
+      background: #fff;
+    }
+
+    .field:focus {
+      border-color: #078333;
+      box-shadow: 0 0 0 2px #07833320;
+    }
+
+    .product-option {
+      border: 1px solid #e2e8e4;
+      border-radius: 9px;
+      padding: 11px;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .product-option.active {
+      border: 2px solid #078333;
+      background: #f0faf3;
+    }
+
+    button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="p-4 sm:p-5">
+
+    <!-- HEADER -->
+    <div class="flex justify-between items-center border-b pb-3 mb-4">
+
+      <div>
+        <h2 class="text-sm font-bold text-green-800">
+          Sod N' Turf
+        </h2>
+        <p class="text-[9px] text-gray-500">
+          Online Ordering & Delivery
+        </p>
+      </div>
+
+      <div class="text-green-700 text-xs font-semibold">
+        SECURE ORDER
+      </div>
+
+    </div>
+
+
+    <!-- ORDER FORM -->
+    <form id="orderForm" class="space-y-4">
+
+      <!-- PRODUCT TYPE -->
+      <div>
+
+        <label class="text-[11px] font-semibold block mb-2">
+          1. Select your sod type
+        </label>
+
+        <div class="grid grid-cols-2 gap-2">
+
+          <label class="product-option active" id="fescueOption">
+
+            <input
+              type="radio"
+              name="product"
+              value="tall-fescue"
+              checked
+              class="hidden"
+            >
+
+            <span class="text-[11px] font-semibold block">
+              Tall Fescue
+            </span>
+
+            <span class="text-[9px] text-gray-500">
+              Turf Type Tall Fescue
+            </span>
+
+          </label>
+
+          <label class="product-option" id="bluegrassOption">
+
+            <input
+              type="radio"
+              name="product"
+              value="kentucky-bluegrass"
+              class="hidden"
+            >
+
+            <span class="text-[11px] font-semibold block">
+              Kentucky Bluegrass
+            </span>
+
+            <span class="text-[9px] text-gray-500">
+              Premium Bluegrass
+            </span>
+
+          </label>
+
+        </div>
+
+      </div>
+
+
+      <!-- QUANTITY -->
+      <div>
+
+        <label class="text-[11px] font-semibold block mb-2">
+          2. Select quantity
+        </label>
+
+        <div class="flex gap-2">
+
+          <input
+            type="number"
+            id="quantity"
+            class="field"
+            min="1"
+            max="1000"
+            value="1"
+            required
+          >
+
+          <select id="unit" class="field max-w-28">
+            <option value="unit">Units</option>
+            <option value="pallet">Pallets</option>
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <!-- DELIVERY DATE -->
+      <div>
+
+        <label class="text-[11px] font-semibold block mb-2">
+          3. Delivery date
+        </label>
+
+        <input
+          type="date"
+          id="deliveryDate"
+          class="field"
+          required
+        >
+
+      </div>
+
+
+      <!-- DELIVERY ADDRESS -->
+      <div>
+
+        <label class="text-[11px] font-semibold block mb-2">
+          4. Delivery information
+        </label>
+
+        <input
+          type="text"
+          id="customerName"
+          placeholder="Full name"
+          class="field mb-2"
+          required
+        >
+
+        <input
+          type="email"
+          id="email"
+          placeholder="Email address"
+          class="field mb-2"
+          required
+        >
+
+        <input
+          type="tel"
+          id="phone"
+          placeholder="Phone number"
+          class="field mb-2"
+          required
+        >
+
+        <input
+          type="text"
+          id="address"
+          placeholder="Delivery street address"
+          class="field mb-2"
+          required
+        >
+
+        <div class="grid grid-cols-2 gap-2">
+
+          <input
+            type="text"
+            id="city"
+            placeholder="City"
+            class="field"
+            required
+          >
+
+          <input
+            type="text"
+            id="zip"
+            placeholder="ZIP code"
+            class="field"
+            required
+          >
+
+        </div>
+
+        <textarea
+          id="instructions"
+          placeholder="Additional delivery instructions (optional)"
+          class="field mt-2"
+          rows="2"
+        ></textarea>
+
+      </div>
+
+
+      <!-- ORDER SUMMARY -->
+      <div class="bg-green-50 border border-green-100 rounded-xl p-3">
+
+        <h3 class="text-xs font-bold text-green-800 mb-3">
+          Order Summary
+        </h3>
+
+        <div class="flex justify-between text-[10px] mb-2">
+          <span class="text-gray-500">Product</span>
+          <span id="summaryProduct" class="font-semibold">
+            Tall Fescue
+          </span>
+        </div>
+
+        <div class="flex justify-between text-[10px] mb-2">
+          <span class="text-gray-500">Quantity</span>
+          <span id="summaryQuantity" class="font-semibold">
+            1 Unit
+          </span>
+        </div>
+
+        <div class="flex justify-between text-[10px] mb-2">
+          <span class="text-gray-500">Delivery date</span>
+          <span id="summaryDate" class="font-semibold">
+            Not selected
+          </span>
+        </div>
+
+        <div class="border-t border-green-200 pt-3 mt-3">
+
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-bold">
+              Total
+            </span>
+
+            <span id="total" class="text-sm font-bold text-green-800">
+              Calculated at checkout
+            </span>
+          </div>
+
+          <p class="text-[9px] text-gray-500 mt-1">
+            Final pricing and applicable delivery charges will be
+            confirmed before payment.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- CHECKOUT BUTTON -->
+      <button
+        type="submit"
+        id="checkoutBtn"
+        class="green text-white w-full rounded-lg py-3 text-xs font-semibold">
+        Continue to Secure Payment →
+      </button>
+
+      <p id="status" class="text-[10px] text-center text-gray-500"></p>
+
+    </form>
+
+
+    <!-- PAYMENT PANEL -->
+    <div id="paymentPanel" class="hidden mt-5">
+
+      <div class="border-t pt-4">
+
+        <h3 class="text-sm font-bold text-green-800 mb-2">
+          Secure Payment
+        </h3>
+
+        <p class="text-[10px] text-gray-500 mb-4">
+          Complete your payment securely.
+        </p>
+
+        <form id="paymentForm">
+
+          <div id="payment-element"></div>
+
+          <button
+            type="submit"
+            id="payBtn"
+            class="green text-white w-full rounded-lg py-3 mt-4 text-xs font-semibold">
+            Pay Securely
+          </button>
+
+        </form>
+
+        <p id="paymentStatus"
+          class="text-[10px] text-center mt-3 text-gray-500">
+        </p>
+
+        <button
+          type="button"
+          id="backBtn"
+          class="text-green-700 text-[10px] underline mt-3">
+          ← Edit order
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+    <div class="text-center mt-5 border-t pt-3">
+
+      <p class="text-[9px] text-gray-400">
+        Secure checkout powered by Stripe.
+      </p>
+
+      <p class="text-[9px] text-gray-400 mt-1">
+        Sod N' Turf LLC
+      </p>
+
+    </div>
+
+  </main>
+
+
+  <script>
+
+    /*
+      PAYMENT CONFIGURATION
+
+      1. Add your Stripe publishable key.
+      2. Create a secure backend endpoint.
+      3. Your backend must calculate product prices and delivery charges.
+      4. Never place your Stripe secret key in this file.
+    */
+
+    const STRIPE_PUBLISHABLE_KEY = 'YOUR_STRIPE_PUBLISHABLE_KEY';
+
+    const CREATE_PAYMENT_ENDPOINT =
+      '/api/create-payment-intent';
+
+    const stripe = Stripe(STRIPE_PUBLISHABLE_KEY);
+
+    let elements = null;
+    let currentOrder = null;
+
+    const form = document.getElementById('orderForm');
+    const paymentPanel = document.getElementById('paymentPanel');
+
+    const fescue = document.getElementById('fescueOption');
+    const bluegrass = document.getElementById('bluegrassOption');
+
+    const quantity = document.getElementById('quantity');
+    const deliveryDate = document.getElementById('deliveryDate');
+
+    // Set earliest delivery date to today.
+    const today = new Date();
+    const localToday = new Date(
+      today.getTime() - today.getTimezoneOffset() * 60000
+    ).toISOString().split('T')[0];
+
+    deliveryDate.min = localToday;
+
+
+    // PRODUCT SELECTION
+    document.querySelectorAll('[name="product"]').forEach(input => {
+
+      input.addEventListener('change', () => {
+
+        fescue.classList.toggle(
+          'active',
+          input.value === 'tall-fescue' && input.checked
+        );
+
+        bluegrass.classList.toggle(
+          'active',
+          input.value === 'kentucky-bluegrass' && input.checked
+        );
+
+        updateSummary();
+
+      });
+
+    });
+
+
+    // UPDATE SUMMARY
+    function updateSummary() {
+
+      const product = document.querySelector(
+        '[name="product"]:checked'
+      ).value;
+
+      const productName = product === 'tall-fescue'
+        ? 'Tall Fescue'
+        : 'Kentucky Bluegrass';
+
+      const qty = Number(quantity.value) || 0;
+
+      const unit = document.getElementById('unit').value;
+
+      document.getElementById('summaryProduct').textContent =
+        productName;
+
+      document.getElementById('summaryQuantity').textContent =
+        `${qty} ${unit}${qty === 1 ? '' : 's'}`;
+
+      document.getElementById('summaryDate').textContent =
+        deliveryDate.value || 'Not selected';
+
+    }
+
+
+    quantity.addEventListener('input', updateSummary);
+    deliveryDate.addEventListener('change', updateSummary);
+
+    document.getElementById('unit').addEventListener(
+      'change',
+      updateSummary
+    );
+
+
+    // CREATE PAYMENT INTENT
+    form.addEventListener('submit', async (event) => {
+
+      event.preventDefault();
+
+      const button = document.getElementById('checkoutBtn');
+      const status = document.getElementById('status');
+
+      if (!form.reportValidity()) return;
+
+      if (!Number.isInteger(Number(quantity.value)) ||
+          Number(quantity.value) < 1 ||
+          Number(quantity.value) > 1000) {
+        status.textContent = 'Enter a valid quantity.';
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = 'Preparing your order...';
+      status.textContent = '';
+
+      currentOrder = {
+
+        product: document.querySelector(
+          '[name="product"]:checked'
+        ).value,
+
+        quantity: Number(quantity.value),
+
+        unit: document.getElementById('unit').value,
+
+        deliveryDate: deliveryDate.value,
+
+        customer: {
+          name: document.getElementById('customerName').value,
+          email: document.getElementById('email').value,
+          phone: document.getElementById('phone').value
+        },
+
+        delivery: {
+          address: document.getElementById('address').value,
+          city: document.getElementById('city').value,
+          zip: document.getElementById('zip').value,
+          instructions: document.getElementById('instructions').value
+        }
+
+      };
+
+      try {
+
+        const response = await fetch(
+          CREATE_PAYMENT_ENDPOINT,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(currentOrder)
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error('Unable to prepare your payment.');
+        }
+
+        const data = await response.json();
+
+        if (!data.clientSecret) {
+          throw new Error('Payment session was not created.');
+        }
+
+        elements = stripe.elements({
+          clientSecret: data.clientSecret,
+          appearance: {
+            theme: 'stripe',
+            variables: {
+              colorPrimary: '#078333',
+              borderRadius: '7px',
+              fontFamily: 'Poppins, sans-serif'
+            }
+          }
+        });
+
+        const paymentElement = elements.create('payment');
+
+        document.getElementById('payment-element').innerHTML = '';
+
+        paymentElement.mount('#payment-element');
+
+        if (data.amount != null) {
+          document.getElementById('total').textContent =
+            new Intl.NumberFormat('en-US', {
+              style: 'currency',
+              currency: data.currency || 'USD'
+            }).format(data.amount / 100);
+        }
+
+        form.classList.add('hidden');
+        paymentPanel.classList.remove('hidden');
+
+      } catch (error) {
+
+        status.textContent = error.message;
+
+      } finally {
+
+        button.disabled = false;
+        button.textContent = 'Continue to Secure Payment →';
+
+      }
+
+    });
+
+
+    // CONFIRM PAYMENT
+    document.getElementById('paymentForm').addEventListener(
+      'submit',
+      async (event) => {
+
+        event.preventDefault();
+
+        const button = document.getElementById('payBtn');
+        const status = document.getElementById('paymentStatus');
+
+        button.disabled = true;
+        button.textContent = 'Processing...';
+
+        try {
+
+          const result = await stripe.confirmPayment({
+            elements,
+            confirmParams: {
+              return_url: window.location.href
+            }
+          });
+
+          if (result.error) {
+            throw new Error(result.error.message);
+          }
+
+        } catch (error) {
+
+          status.textContent = error.message;
+
+          button.disabled = false;
+          button.textContent = 'Pay Securely';
+
+        }
+
+      }
+    );
+
+
+    // RETURN TO ORDER FORM
+    document.getElementById('backBtn').addEventListener(
+      'click',
+      () => {
+
+        paymentPanel.classList.add('hidden');
+        form.classList.remove('hidden');
+
+      }
+    );
+
+
+    updateSummary();
+
+  </script>
+
+</body>
+</html>

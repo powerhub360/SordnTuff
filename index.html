@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sod n' Turf - Premium Central Indiana Sod Supplier</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emeraldDeep: '#064E3B',
+                        emeraldSurface: '#F4F9F5',
+                        emeraldAccent: '#16A34A',
+                        emeraldLight: '#E8F5E9',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Prevent body scrolling when mobile menu is open */
+        body.menu-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+
+      /* Hero Background Slideshow Transitions */
+        .hero-slide {
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.05);
+        }
+        .hero-slide.active {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-white text-slate-900 font-sans antialiased overflow-x-hidden selection:bg-green-600 selection:text-white">
+
+    <!-- REFRESHED NAVIGATION BAR WITH HAMBURGER -->
+    <header class="w-full bg-white/90 backdrop-blur-md py-4 px-6 md:px-12 sticky top-0 z-50 border-b border-emerald-950/10">
+        <div class="max-w-[1440px] mx-auto flex items-center justify-between">
+            <a href="#" class="text-xl sm:text-2xl font-black italic tracking-wider text-emerald-950 flex items-center gap-1">
+                Sod <span class="text-green-600 font-normal not-italic">n'</span> Turf
+            </a>
+            
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-10 text-sm font-semibold tracking-wide text-slate-600">
+                <a href="#home" class="hover:text-green-600 transition-colors">Home</a>
+                <a href="#products" class="hover:text-green-600 transition-colors">Products</a>
+                <a href="#faq" class="hover:text-green-600 transition-colors">FAQ</a>
+                <a href="#about" class="hover:text-green-600 transition-colors">About Us</a>
+                <a href="#calculator" class="hover:text-green-600 transition-colors">Book Order</a>
+            </nav>
+
+            <div class="flex items-center gap-4">
+                <a href="#calculator" class="hidden sm:inline-block bg-green-600 hover:bg-green-700 text-white text-xs uppercase tracking-wider font-bold px-6 py-3 rounded-full transition-all shadow-md shadow-green-600/20">
+                    Get a Quote
+                </a>
+
+                <!-- Mobile Hamburger Button -->
+                <button id="hamburger-btn" aria-label="Toggle Menu" class="md:hidden p-2 text-slate-800 focus:outline-none">
+                    <svg id="menu-icon-open" class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg id="menu-icon-close" class="w-7 h-7 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE SLIDE-OUT MENU -->
+    <div id="mobile-menu" class="fixed inset-0 bg-emerald-950 z-40 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col justify-center px-8 space-y-6">
+        <a href="#home" class="mobile-nav-link text-2xl font-bold text-white hover:text-green-400 transition-colors">Home</a>
+        <a href="#products" class="mobile-nav-link text-2xl font-bold text-white hover:text-green-400 transition-colors">Products</a>
+        <a href="#faq" class="mobile-nav-link text-2xl font-bold text-white hover:text-green-400 transition-colors">FAQ</a>
+        <a href="#about" class="mobile-nav-link text-2xl font-bold text-white hover:text-green-400 transition-colors">About Us</a>
+        <a href="#calculator" class="mobile-nav-link text-2xl font-bold text-white hover:text-green-400 transition-colors">Book Order</a>
+        <div class="pt-6 border-t border-white/10">
+            <a href="#calculator" class="mobile-nav-link block text-center bg-green-600 text-white font-bold py-4 rounded-full uppercase tracking-wider text-sm shadow-lg">
+                Get a Quote
+            </a>
+        </div>
+    </div>
+
+
+
+
+<!-- HERO SECTION (Fixed Overflowing Badge & 75% Black Overlay + 5-Image Slideshow) -->
+    <section id="home" class="relative w-full h-[100dvh] bg-black flex items-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="./image/Sod.jpeg" alt="Lush Green Farm" class="hero-slide active">
+            <img src="./image/sod-slide-1-harvesting.jfif" alt="Lush Green Farm 2" class="hero-slide">
+            <img src="./image/sod-slide-2-packaging.jfif" alt="Lush Green Farm 3" class="hero-slide">
+            <img src="./image/sod-slide-4-laying.jpeg" alt="Lush Green Farm 4" class="hero-slide">
+            <img src="./image/sod-finish-house.jpg" alt="Lush Green Farm 5" class="hero-slide">
+            
+            <div class="absolute inset-0 bg-black/75 z-10"></div>
+        </div>
+
+        <div class="max-w-[1440px] mx-auto w-full px-6 md:px-12 relative z-20 flex flex-col justify-center h-full pt-16">
+            <div class="max-w-2xl">
+                <!-- Fixed Badge Overflowing with responsive text size and leading -->
+                <span class="inline-block py-1.5 px-3 sm:px-4 rounded-full bg-green-400/15 border border-green-400/30 text-green-300 text-[10px] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest mb-6 leading-normal">
+                    Central Indiana's #1 Turf Farm • Southeast of Muncie
+                </span>
+                <h1 class="text-3xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.08] mb-6 text-white">
+                    Sods &amp; Turf <br>to be <span class="text-green-400">proud of.</span>
+                </h1>
+                <p class="text-base sm:text-lg md:text-xl text-slate-200 mb-8 font-normal max-w-lg leading-relaxed">
+                    Freshly harvested, premium grade turf delivered directly to your doorstep with guaranteed fast rooting.
+                </p>
+                <div class="flex flex-wrap items-center gap-4">
+                    <a href="#calculator" class="bg-green-600 hover:bg-green-500 text-white font-semibold px-6 sm:px-8 py-3.5 sm:py-4 rounded-full shadow-lg shadow-black/40 transition-all text-sm sm:text-base">
+                        Place Your Order
+                    </a>
+                    <a href="#products" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-6 sm:px-8 py-3.5 sm:py-4 rounded-full backdrop-blur-sm transition-all border border-white/20 text-sm sm:text-base">
+                        Explore Varieties
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <!-- PRODUCTS & VARIETIES SECTION -->
+    <section id="products" class="w-full bg-[#E8F5E9] py-20 md:py-24 px-6 md:px-12 relative border-t border-emerald-950/10">
+        <div class="max-w-[1440px] mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-green-700 text-xs font-bold uppercase tracking-widest block mb-3">Our Offerings</span>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-emerald-950 mb-4">Our Premium Turf Varieties</h2>
+                <p class="text-slate-700 text-sm md:text-base">Cultivated for maximum durability, drought tolerance, and deep emerald color year-round.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                <div class="bg-white border border-emerald-950/10 rounded-3xl p-6 group hover:border-green-600/40 transition-all shadow-lg shadow-emerald-950/5">
+                    <div class="rounded-2xl overflow-hidden h-60 sm:h-72 mb-6 relative">
+                        <img src="./image/tall-fescue.jpeg" alt="Turf Type Tall Fescue" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-green-700 shadow-sm border border-green-600/15">
+                            High Traffic Choice
+                        </span>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-emerald-950 mb-2">Turf-Type Tall Fescue</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">Deep rooted and exceptionally resilient against heavy use and variable weather conditions.</p>
+                    <a href="#calculator" class="text-green-600 hover:text-green-700 font-semibold text-sm flex items-center gap-2 group-hover:translate-x-1 transition-transform">
+                        Select Variety &rarr;
+                    </a>
+                </div>
+
+                <div class="bg-white border border-emerald-950/10 rounded-3xl p-6 group hover:border-green-600/40 transition-all shadow-lg shadow-emerald-950/5">
+                    <div class="rounded-2xl overflow-hidden h-60 sm:h-72 mb-6 relative">
+                        <img src="./image/kentucky-bluegrass.jpeg" alt="Kentucky Bluegrass" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                        <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-xs font-bold text-green-700 shadow-sm border border-green-600/15">
+                            Lush &amp; Dense
+                        </span>
+                    </div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-emerald-950 mb-2">Kentucky Bluegrass</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed mb-6">Known for its luxurious carpet-like texture, self-repairing capabilities, and vibrant appearance.</p>
+                    <a href="#calculator" class="text-green-600 hover:text-green-700 font-semibold text-sm flex items-center gap-2 group-hover:translate-x-1 transition-transform">
+                        Select Variety &rarr;
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<!-- FROM FARM TO LAWN PROCESS SECTION -->
+    <section id="process" class="w-full bg-white py-20 md:py-28 px-6 md:px-12 border-t border-emerald-950/10">
+        <div class="max-w-[1440px] mx-auto">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-green-700 text-xs font-bold uppercase tracking-widest block mb-3">Seamless Workflow</span>
+                <h2 class="text-2xl sm:text-4xl md:text-5xl font-black text-emerald-950 mb-4 tracking-tight">From Farm to Lawn</h2>
+                <p class="text-slate-600 text-sm md:text-base">Witness our precision process—harvested fresh with advanced equipment, carefully stacked, delivered, and laid to perfection.</p>
+            </div>
+
+            <!-- Process Grid / Timeline Steps -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+                
+                <!-- Step 1: Harvesting -->
+                <div class="bg-[#F4F9F5] border border-emerald-950/10 rounded-3xl p-6 group hover:border-green-600/40 transition-all shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="rounded-2xl overflow-hidden h-56 mb-6 relative shadow-md">
+                            <img src="./image/sod-slide-1-harvesting.jfif" alt="Mechanical Sod Harvesting" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <span class="absolute top-4 left-4 bg-emerald-950/80 backdrop-blur-md px-3.5 py-1 rounded-full text-xs font-bold text-white shadow-sm border border-white/10">
+                                Step 01
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-emerald-950 mb-2">Precision Harvesting</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            Using our state-of-the-art floating-head harvesters, we cut fresh turf uniformly with exact root-system depths for optimal health and rapid post-installation rooting.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-emerald-950/10 text-xs font-bold text-green-700 uppercase tracking-wider">
+                        Farm Cultivated
+                    </div>
+                </div>
+
+                <!-- Step 2: Palletizing & Packaging -->
+                <div class="bg-[#F4F9F5] border border-emerald-950/10 rounded-3xl p-6 group hover:border-green-600/40 transition-all shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="rounded-2xl overflow-hidden h-56 mb-6 relative shadow-md">
+                            <img src="./image/sod-slide-2-packaging.jfif" alt="Sod Rolls Stacked on Pallet" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <span class="absolute top-4 left-4 bg-emerald-950/80 backdrop-blur-md px-3.5 py-1 rounded-full text-xs font-bold text-white shadow-sm border border-white/10">
+                                Step 02
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-emerald-950 mb-2">Secure Packaging</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            Rolls are tightly and efficiently stacked onto heavy-duty pallets right in the field, ready for immediate transit without drying out or losing moisture.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-emerald-950/10 text-xs font-bold text-green-700 uppercase tracking-wider">
+                        Moisture-Sealed Freshness
+                    </div>
+                </div>
+
+                <!-- Step 3: Delivery & Job-Site Drop -->
+                <div class="bg-[#F4F9F5] border border-emerald-950/10 rounded-3xl p-6 group hover:border-green-600/40 transition-all shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="rounded-2xl overflow-hidden h-56 mb-6 relative shadow-md">
+                            <img src="./image/sod-transport.jpg" alt="Job Site Drop off" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <span class="absolute top-4 left-4 bg-emerald-950/80 backdrop-blur-md px-3.5 py-1 rounded-full text-xs font-bold text-white shadow-sm border border-white/10">
+                                Step 03
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-emerald-950 mb-2">Forklift Delivery</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            We deliver directly to your job site using specialized Moffett forklift trailers, placing heavy pallets exactly where you need them to minimize manual labor.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-emerald-950/10 text-xs font-bold text-green-700 uppercase tracking-wider">
+                        Direct Placement
+                    </div>
+                </div>
+
+                <!-- Step 4: Unrolling & Installation -->
+                <div class="bg-[#F4F9F5] border border-emerald-950/10 rounded-3xl p-6 group hover:border-green-600/40 transition-all shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="rounded-2xl overflow-hidden h-56 mb-6 relative shadow-md">
+                            <img src="./image/sod-slide-3-laying.png" alt="Unrolling Sod" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <span class="absolute top-4 left-4 bg-emerald-950/80 backdrop-blur-md px-3.5 py-1 rounded-full text-xs font-bold text-white shadow-sm border border-white/10">
+                                Step 04
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-emerald-950 mb-2">Expert Installation</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            Our team or your contractors unroll each strip tightly across nutrient-rich soil grades, ensuring seamless joins, perfect alignment, and zero gaps.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-emerald-950/10 text-xs font-bold text-green-700 uppercase tracking-wider">
+                        Seamless Fit
+                    </div>
+                </div>
+
+                <!-- Step 5: Professional Hand-Fitting -->
+                <div class="bg-[#F4F9F5] border border-emerald-950/10 rounded-3xl p-6 group hover:border-green-600/40 transition-all shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="rounded-2xl overflow-hidden h-56 mb-6 relative shadow-md">
+                            <img src="./image/sod-slide-4-laying.jpeg" alt="Hand Fitting Sod Edges" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <span class="absolute top-4 left-4 bg-emerald-950/80 backdrop-blur-md px-3.5 py-1 rounded-full text-xs font-bold text-white shadow-sm border border-white/10">
+                                Step 05
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-emerald-950 mb-2">Custom Edge Trim</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            Edges, curves, and borders around landscape beds or walkways are hand-fitted and trimmed precisely for an immaculate, clean-cut finish.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-emerald-950/10 text-xs font-bold text-green-700 uppercase tracking-wider">
+                        Attention to Detail
+                    </div>
+                </div>
+
+                <!-- Step 6: Complete Placement & Transformation -->
+                <div class="bg-[#F4F9F5] border border-emerald-950/10 rounded-3xl p-6 group hover:border-green-600/40 transition-all shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="rounded-2xl overflow-hidden h-56 mb-6 relative shadow-md">
+                            <img src="./image/sod-slide-5-placing.png" alt="Completed Lawn Transformation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <span class="absolute top-4 left-4 bg-emerald-950/80 backdrop-blur-md px-3.5 py-1 rounded-full text-xs font-bold text-white shadow-sm border border-white/10">
+                                Step 06
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-emerald-950 mb-2">Instant Transformation</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-4">
+                            The end result: a lush, deep-green, golf-course quality lawn ready for immediate enjoyment, complete aesthetic upgrade, and fast root establishment.
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-emerald-950/10 text-xs font-bold text-green-700 uppercase tracking-wider">
+                        Instant Beauty
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ / SERVICES SECTION -->
+    <section id="faq" class="w-full bg-[#F4F9F5] py-20 md:py-24 px-6 md:px-12 border-t border-emerald-950/10">
+        <div class="max-w-[1440px] mx-auto">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-green-700 text-xs font-bold uppercase tracking-widest block mb-3">Common Questions</span>
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-emerald-950 mb-4">Everything You Need to Know</h2>
+                <p class="text-slate-600 text-sm md:text-base">Details regarding our roll sizes, delivery logistics, and farm pick-up options.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-white p-6 sm:p-8 rounded-3xl border border-emerald-950/10 shadow-sm">
+                    <h3 class="text-lg font-bold text-emerald-950 mb-3">What size are your rolls?</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">We offer standard rolls measuring 2' x 5' (covering 10 square feet each), designed for easy handling and installation.</p>
+                </div>
+                <div class="bg-white p-6 sm:p-8 rounded-3xl border border-emerald-950/10 shadow-sm">
+                    <h3 class="text-lg font-bold text-emerald-950 mb-3">Delivery or Farm Pick-Up?</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Both options are available! Delivered sod is placed directly on your job site using our specialized forklift trailers.</p>
+                </div>
+                <div class="bg-white p-6 sm:p-8 rounded-3xl border border-emerald-950/10 shadow-sm">
+                    <h3 class="text-lg font-bold text-emerald-950 mb-3">Wholesale &amp; Retail?</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Yes, we serve both homeowners and commercial landscapers across Central Indiana with tailored volume options.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="w-full bg-white py-20 md:py-28 px-6 md:px-12 relative overflow-hidden border-t border-emerald-950/10">
+        <div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            
+            <div class="lg:col-span-5 relative flex justify-center">
+                <div class="absolute -inset-4 bg-gradient-to-tr from-green-400/25 to-emerald-200/20 rounded-full blur-2xl"></div>
+                <div class="relative w-64 h-64 sm:w-80 sm:h-80 rounded-3xl border-4 border-[#F4F9F5] overflow-hidden shadow-xl shadow-emerald-950/10">
+                    <img src="./image/philip-closeup.jfif" alt="Philips Harris Founder" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <div class="lg:col-span-7">
+                <span class="text-green-700 text-xs font-bold uppercase tracking-widest block mb-3">Our Legacy &amp; Standards</span>
+                <h2 class="text-2xl sm:text-4xl md:text-5xl font-black text-emerald-950 mb-6 tracking-tight">Over 40 Years of Growing Excellence</h2>
+                <p class="text-slate-700 text-base md:text-lg leading-relaxed mb-6 font-medium">
+                    Founded by the Harris family, Sod n' Turf has remained Central Indiana's trusted name in agricultural sod production and landscape supply, located southeast of Muncie.
+                </p>
+                <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-8">
+                    We handle everything from residential garden makeovers to massive commercial fields. Every square foot we harvest is nurtured for peak health so your lawn establishes roots faster and stays greener longer.
+                </p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 p-6 bg-[#F4F9F5] rounded-2xl border border-emerald-950/10">
+                    <div>
+                        <span class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Phil Harris</span>
+                        <a href="tel:7657178229" class="text-green-700 font-extrabold text-lg hover:underline">765-717-8229</a>
+                    </div>
+                    <div>
+                        <span class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Sam Harris</span>
+                        <a href="tel:7658083166" class="text-green-700 font-extrabold text-lg hover:underline">765-808-3166</a>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 pt-6 border-t border-emerald-950/10">
+                    <div>
+                        <span class="block text-2xl sm:text-3xl font-black text-green-600 mb-1">40+</span>
+                        <span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Years Experience</span>
+                    </div>
+                    <div>
+                        <span class="block text-2xl sm:text-3xl font-black text-green-600 mb-1">100%</span>
+                        <span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Farm Fresh</span>
+                    </div>
+                    <div>
+                        <span class="block text-2xl sm:text-3xl font-black text-green-600 mb-1">Forklift</span>
+                        <span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Job Site Drop-off</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ORDER SCHEDULING SECTION -->
+    <section id="calculator" class="w-full bg-[#E8F5E9] py-20 md:py-28 px-6 md:px-12 border-t border-emerald-950/10">
+        <div class="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-6">
+                <span class="text-green-700 text-xs font-bold uppercase tracking-widest block mb-3">Quick &amp; Effortless Checkout</span>
+                <h2 class="text-2xl sm:text-4xl md:text-5xl font-black text-emerald-950 mb-6 tracking-tight">Book Your Order Today</h2>
+                <p class="text-slate-700 text-base leading-relaxed mb-8">
+                    Pick your preferred delivery date directly through our scheduling system. We drop off your fresh sod pallets right where you need them using our specialized job-site forklifts.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3 text-sm text-slate-800 font-medium">
+                        <div class="w-6 h-6 rounded-full bg-green-700/15 flex items-center justify-center text-green-700 font-bold">&#10003;</div>
+                        Serving Central Indiana &amp; surrounding areas
+                    </div>
+                    <div class="flex items-center gap-3 text-sm text-slate-800 font-medium">
+                        <div class="w-6 h-6 rounded-full bg-green-700/15 flex items-center justify-center text-green-700 font-bold">&#10003;</div>
+                        Wholesale &amp; retail options available
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-6 bg-white border border-emerald-950/10 rounded-3xl p-6 sm:p-8 shadow-xl shadow-emerald-950/5">
+                <h3 class="text-xl font-bold text-emerald-950 mb-6 flex justify-between items-center">
+                    <span>Schedule Delivery</span>
+                    <span class="text-xs font-semibold text-green-700 bg-green-600/10 px-3 py-1 rounded-full border border-green-600/20">November 2026</span>
+                </h3>
+                
+                <div class="space-y-5">
+                    <div>
+                        <label for="delivery-date" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Select Date</label>
+                        <input id="delivery-date" type="date" value="2026-11-04" class="w-full bg-[#F4F9F5] border border-emerald-950/15 rounded-xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-green-600 focus:ring-2 focus:ring-green-600/20">
+                    </div>
+                    <div>
+                        <label for="sqft-input" class="block text-xs font-bold text-slate-600 uppercase tracking-wider mb-2">Square Footage / Pallets</label>
+                        <input id="sqft-input" type="text" placeholder="e.g., 1,500 sq ft (or rolls)" class="w-full bg-[#F4F9F5] border border-emerald-950/15 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-green-600 focus:ring-2 focus:ring-green-600/20">
+                    </div>
+                    <button type="button" class="w-full bg-green-700 hover:bg-green-800 text-white font-bold py-4 rounded-xl transition-all shadow-md shadow-green-700/25 text-sm tracking-wider uppercase">
+                        Confirm &amp; Reserve Delivery
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="w-full bg-emerald-900 py-12 px-6 md:px-12 border-t border-emerald-950/15 text-center text-white">
+        <div class="max-w-[1440px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <a href="#" class="text-xl font-black italic text-white">
+                Sod <span class="text-green-400 font-normal not-italic">n'</span> Turf
+            </a>
+            <div class="flex items-center gap-6 sm:gap-8 text-sm text-emerald-100 font-semibold flex-wrap justify-center">
+                <a href="#home" class="hover:text-green-400 transition-colors">Home</a>
+                <a href="#products" class="hover:text-green-400 transition-colors">Products</a>
+                <a href="#faq" class="hover:text-green-400 transition-colors">FAQ</a>
+                <a href="#about" class="hover:text-green-400 transition-colors">About</a>
+                <a href="#calculator" class="hover:text-green-400 transition-colors">Book Order</a>
+            </div>
+            <p class="text-xs text-emerald-200/80 font-medium">
+                &copy; 2026 Sod n' Turf. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- MOBILE MENU TOGGLE SCRIPT -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 1. Mobile Menu Toggle Script
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIconOpen = document.getElementById('menu-icon-open');
+        const menuIconClose = document.getElementById('menu-icon-close');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        function toggleMenu() {
+            const isOpen = mobileMenu.classList.toggle('translate-x-full');
+            document.body.classList.toggle('menu-open', !isOpen);
+            menuIconOpen.classList.toggle('hidden', !isOpen);
+            menuIconClose.classList.toggle('hidden', isOpen);
+        }
+
+        if (hamburgerBtn && mobileMenu) {
+            hamburgerBtn.addEventListener('click', toggleMenu);
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', toggleMenu);
+            });
+        }
+
+        // 2. Hero Background Slideshow Script
+        const slides = document.querySelectorAll('.hero-slide');
+        let currentSlide = 0;
+
+        if (slides.length > 0) {
+            setInterval(() => {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }, 5000); // Changes image every 5 seconds (you can adjust this timing if desired)
+        }
+    });
+</script>
+</body>
+</html>
